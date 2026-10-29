@@ -18,7 +18,7 @@
             line-height: 1.6;
         }
 
-        /* Hlavička s logy po stranách */
+        /* Hlavička s logem po stranách */
         header {
             background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             border-bottom: 3px solid #c59b27;
@@ -32,11 +32,14 @@
         .header-side {
             flex: 1;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            color: #c59b27;
-            font-size: 0.9rem;
-            font-weight: bold;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
         }
 
         .header-center {
@@ -55,12 +58,6 @@
             font-weight: 600;
             margin-top: 0.3rem;
             font-size: 0.95rem;
-        }
-
-        /* Ikona klobouku/odznaku v textové podobě nebo jako placeholder */
-        .badge-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.2rem;
         }
 
         /* Navigace */
@@ -165,10 +162,9 @@
 <body>
 
     <header>
-        <!-- Levá strana: Logo / Klobouk a odznak -->
+        <!-- Levá strana: Logo SASP -->
         <div class="header-side">
-            <div class="badge-icon">🎩⭐</div>
-            <span>SASP Logo</span>
+            <img src="logo.png" alt="SASP Logo">
         </div>
 
         <!-- Střed: Název -->
@@ -177,10 +173,9 @@
             <p>Oběť — Čest — Služba | Oficiální Portál</p>
         </div>
 
-        <!-- Pravá strana: Logo / Klobouk a odznak -->
+        <!-- Pravá strana: Logo SASP -->
         <div class="header-side">
-            <div class="badge-icon">🎩⭐</div>
-            <span>SASP Logo</span>
+            <img src="logo.png" alt="SASP Logo">
         </div>
     </header>
 
