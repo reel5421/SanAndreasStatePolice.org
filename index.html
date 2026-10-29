@@ -18,25 +18,49 @@
             line-height: 1.6;
         }
 
-        /* Hlavička */
+        /* Hlavička s logy po stranách */
         header {
             background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             border-bottom: 3px solid #c59b27;
-            padding: 2rem;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
         }
 
-        header h1 {
+        .header-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #c59b27;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
             color: #ffffff;
-            font-size: 2.2rem;
+            font-size: 2rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        header p {
+        .header-center p {
             color: #c59b27;
             font-weight: 600;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        /* Ikona klobouku/odznaku v textové podobě nebo jako placeholder */
+        .badge-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
         }
 
         /* Navigace */
@@ -44,7 +68,8 @@
             background-color: #161b22;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
             padding: 1rem;
             border-bottom: 1px solid #30363d;
         }
@@ -55,7 +80,8 @@
             font-weight: bold;
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
@@ -127,20 +153,44 @@
             margin-top: 3rem;
             border-top: 1px solid #30363d;
         }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>San Andreas State Police</h1>
-        <p>Oběť — Čest — Služba | Oficiální Portál pro Veřejnost</p>
+        <!-- Levá strana: Logo / Klobouk a odznak -->
+        <div class="header-side">
+            <div class="badge-icon">🎩⭐</div>
+            <span>SASP Logo</span>
+        </div>
+
+        <!-- Střed: Název -->
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+
+        <!-- Pravá strana: Logo / Klobouk a odznak -->
+        <div class="header-side">
+            <div class="badge-icon">🎩⭐</div>
+            <span>SASP Logo</span>
+        </div>
     </header>
 
     <nav>
-        <a href="#uvol">Úvod</a>
+        <a href="#uvod">Úvod</a>
         <a href="#nabor">Nábor</a>
-        <a href="#zakony">Zákony & Pokuty</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#media">Media Relations</a>
+        <a href="#divize">Divize</a>
+        <a href="#vedeni">Vedení</a>
+        <a href="#dotazy">Dotazy</a>
     </nav>
 
     <div class="container">
@@ -156,16 +206,28 @@
                 <a href="#" class="btn">Podat Přihlášku</a>
             </div>
 
-            <div class="card" id="zakony">
-                <h3>Trestní zákoník</h3>
-                <p>Prohlédněte si aktuální sazebník pokut, dopravní předpisy a platnou legislativu státu San Andreas.</p>
-                <a href="#" class="btn">Zobrazit Zákony</a>
+            <div class="card" id="divize">
+                <h3>Divize</h3>
+                <p>Seznamte se s našimi specializovanými složkami, od dálniční patroly až po leteckou podporu.</p>
+                <a href="#" class="btn">Zobrazit Divize</a>
             </div>
 
-            <div class="card" id="kontakt">
-                <h3>Stížnosti & Dotazy</h3>
-                <p>Máte dotaz na vedení sboru nebo chcete podat oficiální stížnost na chování příslušníka?</p>
-                <a href="#" class="btn">Kontaktovat Vedení</a>
+            <div class="card" id="vedeni">
+                <h3>Vedení sboru</h3>
+                <p>Kompletní přehled vrchního velení San Andreas State Police a kontakty na odpovědné osoby.</p>
+                <a href="#" class="btn">Zobrazit Vedení</a>
+            </div>
+
+            <div class="card" id="media">
+                <h3>Media Relations</h3>
+                <p>Tiskové zprávy, aktuální oznámení pro veřejnost, pátrání po osobách a tiskovky sboru.</p>
+                <a href="#" class="btn">Přejít na Tiskovky</a>
+            </div>
+
+            <div class="card" id="dotazy">
+                <h3>Dotazy & Kontakt</h3>
+                <p>Máte dotaz na vedení, potřebujete podat hlášení nebo oficiální stížnost?</p>
+                <a href="#" class="btn">Kontaktovat Nás</a>
             </div>
         </div>
     </div>
