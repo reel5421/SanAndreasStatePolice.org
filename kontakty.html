@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Kontakty & Vedení</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 3px solid #c59b27;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #21262d;
+            color: #c59b27;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #21262d;
+            color: #e6edf3;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border: 1px solid #30363d;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #30363d;
+            color: #c59b27;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2rem;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .section-group {
+            margin-bottom: 2.5rem;
+        }
+
+        /* Grid pro 1 sloupec (vycentrovaný box) */
+        .grid-1 {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        /* Grid pro 2 sloupce vedle sebe */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .leader-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .leader-card.main-card {
+            border: 2px solid #c59b27;
+        }
+
+        .leader-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #c59b27;
+            margin-bottom: 1rem;
+        }
+
+        .leader-role {
+            color: #c59b27;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .leader-name {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-contact {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .leader-contact span {
+            color: #58a6ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            margin-top: 3rem;
+            border-top: 1px solid #30363d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html" class="active">Kontakty & Vedení</a>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&larr; Zpět na hlavní stránku</a>
+
+        <div class="page-title">
+            <h2>Kontakty a Velení Sboru</h2>
+            <p>Detailní přehled velitelských pozic a kontaktů San Andreas State Police.</p>
+        </div>
+
+        <!-- 1. Commissioner (1 rámeček s fotkou) -->
+        <div class="section-group">
+            <div class="grid-1">
+                <div class="leader-card main-card">
+                    <img src="commisioner.png" alt="Commissioner Michael Denver">
+                    <div class="leader-role">Commissioner</div>
+                    <div class="leader-name">Michael Denver</div>
+                    <div class="leader-contact">
+                        E-mail: <span>denver.m@sasp.gov</span><br>
+                        Discord: <span>owfi__131</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Deputy Commissioner (1 rámeček) -->
+        <div class="section-group">
+            <div class="grid-1">
+                <div class="leader-card">
+                    <div class="leader-role">Deputy Commissioner</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Assistant Commissioner (1 rámeček) -->
+        <div class="section-group">
+            <div class="grid-1">
+                <div class="leader-card">
+                    <div class="leader-role">Assistant Commissioner</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Colonel (1 rámeček) -->
+        <div class="section-group">
+            <div class="grid-1">
+                <div class="leader-card">
+                    <div class="leader-role">Colonel</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Lieutenant Colonel (1 rámeček) -->
+        <div class="section-group">
+            <div class="grid-1">
+                <div class="leader-card">
+                    <div class="leader-role">Lieutenant Colonel</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Captain (2 rámečky vedle sebe) -->
+        <div class="section-group">
+            <div class="grid-2">
+                <div class="leader-card">
+                    <div class="leader-role">Captain</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-role">Captain</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Lieutenant (2 rámečky vedle sebe) -->
+        <div class="section-group">
+            <div class="grid-2">
+                <div class="leader-card">
+                    <div class="leader-role">Lieutenant</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-role">Lieutenant</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Sergeant (4 rámečky celkem - 2 a 2 vedle sebe) -->
+        <div class="section-group">
+            <div class="grid-2" style="margin-bottom: 1.5rem;">
+                <div class="leader-card">
+                    <div class="leader-role">Sergeant II</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-role">Sergeant II</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="leader-card">
+                    <div class="leader-role">Sergeant I</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-role">Sergeant I</div>
+                    <div class="leader-name">### ###</div>
+                    <div class="leader-contact">
+                        E-mail: <span>#.####@sasp.gov</span><br>
+                        Discord: <span>TBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police.</p>
+    </footer>
+
+</body>
+</html>
