@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Historie Sboru</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header s logy a názvem */
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 2px solid #c59b27;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Navigace */
+        nav {
+            background-color: #121721;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover {
+            color: #c59b27;
+        }
+
+        nav a.active {
+            color: #c59b27;
+            background-color: rgba(197, 155, 39, 0.1);
+        }
+
+        .btn-login {
+            background-color: rgba(197, 155, 39, 0.1);
+            border: 1px solid #c59b27;
+            color: #c59b27 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            background-color: #c59b27 !important;
+            color: #0b0e14 !important;
+        }
+
+        /* Hlavní obsah */
+        .main-container {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            font-size: 1.05rem;
+        }
+
+        /* Časová osa (Timeline) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #1f2733;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: #0b0e14;
+            border: 3px solid #c59b27;
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background-color: #121721;
+            position: relative;
+            border-radius: 8px;
+            border: 1px solid #1f2733;
+            transition: border-color 0.2s;
+        }
+
+        .timeline-content:hover {
+            border-color: #30363d;
+        }
+
+        .timeline-content h3 {
+            color: #c59b27;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.92rem;
+            color: #8b949e;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2733;
+            margin-top: auto;
+        }
+
+        /* Responsivita */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item::after {
+                left: 23px;
+            }
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>SAN ANDREAS STATE POLICE</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="o-nas.html">O nás</a>
+        <a href="historie.html" class="active">Historie</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="formalcomplaint.html">Dotazy & Kontakt</a>
+        <a href="interni.html" class="btn-login">🔒 Interní Login</a>
+    </nav>
+
+    <div class="main-container">
+
+        <div class="page-title">
+            <h2>Historie Sboru</h2>
+            <p>Vývoj a významné milníky San Andreas State Police od 19. století po současnost.</p>
+        </div>
+
+        <div class="timeline">
+            
+            <!-- 1878 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1878</h3>
+                    <p>Založení prvních regionálních bezpečnostních sborů a State Police hlídek v klíčových oblastech státu San Andreas kvůli rostoucí kriminalitě na obchodních stezkách.</p>
+                </div>
+            </div>
+
+            <!-- 1881 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1881</h3>
+                    <p>Formální rozšíření pravomocí venkovských hlídek a vytvoření prvního jednotného jurisdikčního systému pro ochranu dvousměrných dopravních spojnic.</p>
+                </div>
+            </div>
+
+            <!-- 1897 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1897</h3>
+                    <p>Modernizace sboru s nástupem prvních rychlých dopravních prostředků. Zavedení pravidelných koňských a posléze i prvních motorizovaných hlídek.</p>
+                </div>
+            </div>
+
+            <!-- 1929 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1929</h3>
+                    <p>Zásadní restrukturalizace během hospodářské krize. Vznik specializované státní Traffic Enforcement pro dohled nad prudce rostoucím automobilovým provozem.</p>
+                </div>
+            </div>
+
+            <!-- 1974 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>1974</h3>
+                    <p>Technologický skok a sjednocení operativních složek. Zavedení celostátní rádiové sítě a zakládání specializovaných divizí pro rychlou reakci.</p>
+                </div>
+            </div>
+
+            <!-- 1997 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>1997</h3>
+                    <p>Velká reorganizace a oficiální přejmenování na **San Andreas State Police (SASP)**. Sjednocení Highway Patrol a státních vyšetřovatelů pod jedno velitelství.</p>
+                </div>
+            </div>
+
+            <!-- 2012 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>2012</h3>
+                    <p>Přechod na moderní vozový park, nasazení pokročilých taktických výbav a zahájení úzké digitalizace spisů a záznamů o podezřelých osobách.</p>
+                </div>
+            </div>
+
+            <!-- 2019 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>2019</h3>
+                    <p>Rozšíření letecké podpory (Air Support) a taktických jednotek SWAT. Zavedení přísnějších protokolů pro vnitřní záležitosti a transparentnost sboru.</p>
+                </div>
+            </div>
+
+            <!-- 2026 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>2026</h3>
+                    <p>Plná digitalizace portálu SASP, spuštění automatických online booking systémů, zabezpečených interních databází a formulářů pro veřejnost.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Všechna práva vyhrazena.</p>
+    </footer>
+
+</body>
+</html>
