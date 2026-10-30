@@ -297,20 +297,11 @@
 
         <div class="page-title">
             <h2>Zápis o Zadržení (Booking Report)</h2>
-            <p>Vyplňte protokol o zatčení pro automatické odeslání na Discord i uložení do databáze.</p>
+            <p>Vyplňte protokol o zatčení pro automatické odeslání do databáze SASP na Discordu.</p>
         </div>
 
         <div class="form-card">
             <form id="bookingForm">
-
-                <!-- Zatržítko pro nastavení Webhooku -->
-                <div class="form-group full-width" style="margin-bottom: 1rem;">
-                    <label>Discord Webhook URL (Nastavení kanálu):</label>
-                    <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." required>
-                    <small style="color: #8b949e; font-size: 0.8rem;">Zadejte adresu Webhooku vašeho Discord kanálu.</small>
-                </div>
-
-                <hr style="border-color: #30363d; margin-bottom: 1.5rem;">
 
                 <div class="form-grid">
                     <!-- Údaje o podezřelém -->
@@ -370,7 +361,7 @@
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    🚀 Odeslat Booking Report na Discord
+                    🚀 Odeslat Booking/Incident Report
                 </button>
 
             </form>
@@ -384,113 +375,4 @@
             <div class="template-preview-card">
                 <p style="color: #c59b27; font-weight: bold; font-size: 1.05rem;">🚨 NOVÝ BOOKING REPORT — SASP</p>
                 <hr style="border-color: #30363d; margin: 0.5rem 0 0.8rem 0;">
-                <p><strong>👤 Zadržený:</strong> John Doe (DoB: 12.05.1998)</p>
-                <p><strong>👮 Zatýkající Příslušník:</strong> Senior Trooper Michael Denver (Lima-1)</p>
-                <p><strong>⚖️ Trest & Pokuta:</strong> $5,000 | 30 měsíců</p>
-                <p><strong>📜 Obvinění:</strong> CVC § 23103 – Bezohledná jízda, PC § 148(a) – Resisting Arrest</p>
-                <p><strong>📝 Popis Situace:</strong> Podezřelý ujížděl hlídce v rychlém vozidle, po kolizi s kandelábrem odmítl vystoupit a kladil aktivní odpor při poutech.</p>
-                <p><strong>📦 Zabavené Předměty & Poznámky:</strong> Zabavena nelegální pistole a 2x sáček omamných látek.</p>
-                <p style="color: #8b949e; font-size: 0.8rem; margin-top: 0.8rem;">[ Zde se automaticky zobrazí nahraná fotografie zadrženého (Mugshot) ]</p>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 San Andreas State Police.</p>
-    </footer>
-
-    <script>
-        // Náhled obrázku
-        function previewImage(url) {
-            const img = document.getElementById('imgPreview');
-            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
-                img.src = url;
-                img.style.display = 'inline-block';
-            } else {
-                img.style.display = 'none';
-            }
-        }
-
-        // Pamatovat si zadaný Webhook v paměti prohlížeče
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedWebhook = localStorage.getItem('sasp_webhook_url');
-            if (savedWebhook) {
-                document.getElementById('webhookUrl').value = savedWebhook;
-            }
-        });
-
-        // Odeslání formuláře na Discord Webhook
-        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const webhookUrl = document.getElementById('webhookUrl').value;
-            const suspectName = document.getElementById('suspectName').value;
-            const suspectDob = document.getElementById('suspectDob').value;
-            const fineAmount = document.getElementById('fineAmount').value;
-            const jailTime = document.getElementById('jailTime').value;
-            const officerName = document.getElementById('officerName').value;
-            const photoUrl = document.getElementById('photoUrl').value;
-            const charges = document.getElementById('charges').value;
-            const situation = document.getElementById('situation').value;
-            const notes = document.getElementById('notes').value || 'Žádné doplňující poznámky';
-
-            const statusMsg = document.getElementById('statusMsg');
-
-            // Uložit Webhook pro příště
-            localStorage.setItem('sasp_webhook_url', webhookUrl);
-
-            // Vytvoření Discord Embed zprávy
-            const embedData = {
-                username: "SASP Booking System",
-                avatar_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png",
-                embeds: [
-                    {
-                        title: "🚨 NOVÝ BOOKING REPORT — SASP",
-                        color: 12948263, // Zlatá barva (#c59b27)
-                        fields: [
-                            { name: "👤 Zadržený", value: `**Jméno:** ${suspectName}\n**DoB:** ${suspectDob}`, inline: true },
-                            { name: "👮 Zatýkající Příslušník", value: officerName, inline: true },
-                            { name: "⚖️ Trest & Pokuta", value: `**Pokuta:** $${Number(fineAmount).toLocaleString()}\n**Trest:** ${jailTime} měsíců`, inline: true },
-                            { name: "📜 Obvinění", value: charges, inline: false },
-                            { name: "📝 Popis Situace", value: situation, inline: false },
-                            { name: "📦 Zabavené Předměty & Poznámky", value: notes, inline: false }
-                        ],
-                        image: photoUrl ? { url: photoUrl } : null,
-                        footer: {
-                            text: "San Andreas State Police — Interní Evidence",
-                            icon_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png"
-                        },
-                        timestamp: new Date().toISOString()
-                    }
-                ]
-            };
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(embedData)
-                });
-
-                if (response.ok) {
-                    statusMsg.className = 'status-msg status-success';
-                    statusMsg.innerText = '✅ Booking report byl úspěšně odeslán na Discord!';
-                    statusMsg.style.display = 'block';
-                    document.getElementById('bookingForm').reset();
-                    document.getElementById('imgPreview').style.display = 'none';
-                    // Obnovit načtený Webhook URL
-                    document.getElementById('webhookUrl').value = webhookUrl;
-                } else {
-                    throw new Error('Chyba při odesílání.');
-                }
-            } catch (err) {
-                statusMsg.className = 'status-msg status-error';
-                statusMsg.innerText = '❌ Nepodařilo se odeslat report. Zkontrolujte URL Webhooku.';
-                statusMsg.style.display = 'block';
-            }
-        });
-    </script>
-
-</body>
-</html>
+                <p
