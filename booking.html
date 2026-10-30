@@ -223,34 +223,6 @@
             border: 1px solid rgba(248, 81, 73, 0.4);
         }
 
-        /* Styl pro ukázkovou předlohu */
-        .template-box {
-            background-color: #161b22;
-            border: 1px dashed #c59b27;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .template-box h3 {
-            color: #c59b27;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-        }
-
-        .template-preview-card {
-            background-color: #0b0e14;
-            border-left: 4px solid #c59b27;
-            padding: 1.2rem;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        .template-preview-card p {
-            margin-bottom: 0.5rem;
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -333,7 +305,7 @@
                     <div class="form-group">
                         <label for="photoUrl">URL Fotografie Zadrženého (Mugshot):</label>
                         <input type="url" id="photoUrl" placeholder="https://i.imgur.com/... (přímý odkaz končící na .png/.jpg)" oninput="previewImage(this.value)" required>
-                        <small style="color: #c59b27; font-size: 0.75rem;">⚠️ Musí jít o <b>přímý odkaz na obrázek</b> (např. z Imguru – pravé tlačítko -> Kopírovat adresu obrázku, nebo nahraný přímo v chatu na Discordu a zkopírovaný odkaz).</small>
+                        <small style="color: #c59b27; font-size: 0.75rem;">⚠️ Musí jít o <b>přímý odkaz na obrázek</b> (např. z Imguru nebo zkopírovaný z Discord chatu).</small>
                     </div>
                 </div>
 
@@ -361,7 +333,7 @@
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    🚀 Odeslat Booking/Incident Report
+                    🚀 Odeslat Booking Report na Discord
                 </button>
 
             </form>
@@ -369,10 +341,100 @@
             <div id="statusMsg" class="status-msg"></div>
         </div>
 
-        <!-- PŘEDLOHA / UKÁZKA VÝSTUPU NA DISCORDU -->
-        <div class="template-box">
-            <h3>📋 Předloha (Jak bude report vypadat na Discordu)</h3>
-            <div class="template-preview-card">
-                <p style="color: #c59b27; font-weight: bold; font-size: 1.05rem;">🚨 NOVÝ BOOKING REPORT — SASP</p>
-                <hr style="border-color: #30363d; margin: 0.5rem 0 0.8rem 0;">
-                <p
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police.</p>
+    </footer>
+
+    <script>
+        // Nastavený Discord Webhook napevno
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1565556241919377529/HcCxyQfrtqbtXSFWzwF9axGueateFFOlsKAUQWm9hoYgocdxhbmJPiPKkafIZs2AjA7s";
+
+        // Náhled obrázku
+        function previewImage(url) {
+            const img = document.getElementById('imgPreview');
+            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                img.src = url;
+                img.style.display = 'inline-block';
+            } else {
+                img.style.display = 'none';
+            }
+        }
+
+        // Odeslání formuláře na Discord Webhook
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log("Odesílání formuláře spuštěno...");
+
+            const suspectName = document.getElementById('suspectName').value;
+            const suspectDob = document.getElementById('suspectDob').value;
+            const fineAmount = document.getElementById('fineAmount').value;
+            const jailTime = document.getElementById('jailTime').value;
+            const officerName = document.getElementById('officerName').value;
+            const photoUrl = document.getElementById('photoUrl').value;
+            const charges = document.getElementById('charges').value;
+            const situation = document.getElementById('situation').value;
+            const notes = document.getElementById('notes').value || 'Žádné doplňující poznámky';
+
+            const statusMsg = document.getElementById('statusMsg');
+
+            // Vytvoření Discord Embed zprávy
+            const embedData = {
+                username: "SASP Booking System",
+                avatar_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png",
+                embeds: [
+                    {
+                        title: "🚨 NOVÝ BOOKING REPORT — SASP",
+                        color: 12948263, // Zlatá barva (#c59b27)
+                        fields: [
+                            { name: "👤 Zadržený", value: `**Jméno:** ${suspectName}\n**DoB:** ${suspectDob}`, inline: true },
+                            { name: "👮 Zatýkající Příslušník", value: officerName, inline: true },
+                            { name: "⚖️ Trest & Pokuta", value: `**Pokuta:** $${Number(fineAmount).toLocaleString()}\n**Trest:** ${jailTime} měsíců`, inline: true },
+                            { name: "📜 Obvinění", value: charges, inline: false },
+                            { name: "📝 Popis Situace", value: situation, inline: false },
+                            { name: "📦 Zabavené Předměty & Poznámky", value: notes, inline: false }
+                        ],
+                        image: photoUrl ? { url: photoUrl } : null,
+                        footer: {
+                            text: "San Andreas State Police — Interní Evidence",
+                            icon_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png"
+                        },
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            try {
+                console.log("Odesílám požadavek na Discord...");
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(embedData)
+                });
+
+                console.log("Odpověď z Discordu status:", response.status);
+
+                if (response.ok || response.status === 204) {
+                    statusMsg.className = 'status-msg status-success';
+                    statusMsg.innerText = '✅ Booking report byl úspěšně odeslán na Discord!';
+                    statusMsg.style.display = 'block';
+                    document.getElementById('bookingForm').reset();
+                    document.getElementById('imgPreview').style.display = 'none';
+                    console.log("Report úspěšně odeslán.");
+                } else {
+                    const errText = await response.text();
+                    console.error("Discord vrátil chybu:", errText);
+                    throw new Error('Chyba serveru: ' + response.status);
+                }
+            } catch (err) {
+                console.error("Chyba při fetch požadavku:", err);
+                statusMsg.className = 'status-msg status-error';
+                statusMsg.innerText = '❌ Nepodařilo se odeslat report. Zkontrolujte konzoli (F12).';
+                statusMsg.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
