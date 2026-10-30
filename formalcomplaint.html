@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Formální Stížnost (Formal Complaint)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 3px solid #c59b27;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #21262d;
+            color: #c59b27;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #21262d;
+            color: #e6edf3;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border: 1px solid #30363d;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #30363d;
+            color: #c59b27;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .form-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .warning-box {
+            background-color: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.4);
+            border-left: 4px solid #f85149;
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #f0f6fc;
+        }
+
+        .warning-box strong {
+            color: #f85149;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #c59b27;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, textarea {
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 0.7rem;
+            color: #e6edf3;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #c59b27;
+        }
+
+        .btn-submit {
+            background-color: #5865F2;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #4752C4;
+        }
+
+        .status-msg {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .status-success {
+            background-color: rgba(46, 160, 67, 0.2);
+            color: #3fb950;
+            border: 1px solid rgba(46, 160, 67, 0.4);
+        }
+
+        .status-error {
+            background-color: rgba(248, 81, 73, 0.2);
+            color: #f85149;
+            border: 1px solid rgba(248, 81, 73, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            margin-top: 3rem;
+            border-top: 1px solid #30363d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="interni.html">🔒 Interní Systém</a>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&larr; Zpět na úvod</a>
+
+        <div class="page-title">
+            <h2>Podání Formální Stížnosti</h2>
+            <p>Vnitřní záležitosti (Internal Affairs) — Hlášení nepatřičného chování příslušníků SASP.</p>
+        </div>
+
+        <div class="form-card">
+            <!-- Právní poučení / Upozornění -->
+            <div class="warning-box">
+                <strong>⚠️ PRÁVNÍ UPOZORNĚNÍ A POUČENÍ:</strong> 
+                Podáním tohoto formuláře prohlašujete, že všechny uváděné informace jsou pravdivé a odpovídají skutečnosti. 
+                Podle <strong>California Penal Code § 148.5 (PC)</strong> je podání lživého trestního oznámení, křivé obvinění příslušníka složek činných v trestním řízení nebo úmyslné uvádění nepravdivých informací v úředním hlášení považováno za <strong>trestný čin (Misdemeanor / Felony)</strong>. Osoby, které úmyslně uvedou nepravdivé informace za účelem poškození dobrého jména příslušníka nebo maření spravedlnosti, budou stíhány podle platných zákonů státu Kalifornie.
+            </div>
+
+            <form id="complaintForm">
+                <div class="form-grid">
+                    <!-- Údaje o obviněném trooperovi -->
+                    <div class="form-group">
+                        <label for="officerName">Jméno Obviněného Troopera:</label>
+                        <input type="text" id="officerName" placeholder="např. Trooper John Smith" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="badgeNumber">Badge Number (Odznak) Troopera:</label>
+                        <input type="text" id="badgeNumber" placeholder="např. L-42" required>
+                    </div>
+
+                    <!-- Údaje o stěžovateli -->
+                    <div class="form-group">
+                        <label for="complainantName">Vaše Jméno a Příjmení (Nahlašovatel):</label>
+                        <input type="text" id="complainantName" placeholder="např. Arthur Morgan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complainantContact">Kontakt (Discord / Tel. číslo):</label>
+                        <input type="text" id="complainantContact" placeholder="např. jmeno#0000" required>
+                    </div>
+                </div>
+
+                <!-- Popis situace -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                    <label for="situation">Popis Situace (Detailní průběh incidentu):</label>
+                    <textarea id="situation" rows="5" placeholder="Detailně popište, co se stalo, kdy a za jakých okolností..." required></textarea>
+                </div>
+
+                <!-- Důkazy -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                    <label for="evidence">Důkazy (Odkazy na videa, záznamy, screenshoty):</label>
+                    <textarea id="evidence" rows="3" placeholder="Vložte odkazy (např. YouTube, Imgur, Streamable)..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    ⚖️ Odeslat Formální Stížnost na Vnitřní Záležitosti
+                </button>
+            </form>
+
+            <div id="statusMsg" class="status-msg"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Internal Affairs Division.</p>
+    </footer>
+
+    <script>
+        // Webhook pro stížnosti
+        const COMPLAINT_WEBHOOK_URL = "https://discord.com/api/webhooks/1565714664183177287/nV1fiazMt_BA1hvoF3CARBLFSw7-S1twmZkJdLTco8OMEWcrVjEVJnsXX3F3Zn0C6wpX";
+
+        document.getElementById('complaintForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const officerName = document.getElementById('officerName').value;
+            const badgeNumber = document.getElementById('badgeNumber').value;
+            const complainantName = document.getElementById('complainantName').value;
+            const complainantContact = document.getElementById('complainantContact').value;
+            const situation = document.getElementById('situation').value;
+            const evidence = document.getElementById('evidence').value;
+
+            const statusMsg = document.getElementById('statusMsg');
+
+            // Sestavení Discord Embed zprávy pro stížnosti (výrazná výstražná barva, např. červená/oranžová)
+            const embedData = {
+                username: "SASP Internal Affairs",
+                avatar_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png",
+                embeds: [
+                    {
+                        title: "🚨 NOVÁ FORMÁLNÍ STÍŽNOST NA PŘÍSLUŠNÍKA",
+                        color: 15158332, // Výrazná červená (#e74c3c)
+                        fields: [
+                            { name: "👮 Obviněný Příslušník", value: `**Jméno:** ${officerName}\n**Badge:** ${badgeNumber}`, inline: true },
+                            { name: "👤 Nahlašovatel", value: `**Jméno:** ${complainantName}\n**Kontakt:** ${complainantContact}`, inline: true },
+                            { name: "📝 Popis Situace", value: situation, inline: false },
+                            { name: "📎 Důkazy", value: evidence, inline: false },
+                            { name: "⚠️ Právní doložka", value: "Stěžovatel byl poučen o **California Penal Code § 148.5** (trestnost křivého obvinění). Hlášení podáno pod hrozbou trestního stíhání.", inline: false }
+                        ],
+                        footer: {
+                            text: "San Andreas State Police — Oddělení vnitřních záležitostí (IA)",
+                            icon_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png"
+                        },
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(COMPLAINT_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(embedData)
+                });
+
+                if (response.ok || response.status === 204) {
+                    statusMsg.className = 'status-msg status-success';
+                    statusMsg.innerText = '✅ Stížnost byla úspěšně odeslána na oddělení vnitřních záležitostí.';
+                    statusMsg.style.display = 'block';
+                    document.getElementById('complaintForm').reset();
+                } else {
+                    throw new Error('Chyba serveru.');
+                }
+            } catch (err) {
+                statusMsg.className = 'status-msg status-error';
+                statusMsg.innerText = '❌ Nepodařilo se odeslat stížnost. Zkontrolujte připojení.';
+                statusMsg.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
