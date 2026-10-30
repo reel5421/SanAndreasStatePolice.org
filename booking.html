@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Booking Report System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 3px solid #c59b27;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #21262d;
+            color: #c59b27;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #21262d;
+            color: #e6edf3;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border: 1px solid #30363d;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #30363d;
+            color: #c59b27;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .form-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #c59b27;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, textarea, select {
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 0.7rem;
+            color: #e6edf3;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #c59b27;
+        }
+
+        .img-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            margin-top: 0.5rem;
+            display: none;
+            object-fit: cover;
+        }
+
+        .btn-submit {
+            background-color: #5865F2;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #4752C4;
+        }
+
+        .status-msg {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .status-success {
+            background-color: rgba(46, 160, 67, 0.2);
+            color: #3fb950;
+            border: 1px solid rgba(46, 160, 67, 0.4);
+        }
+
+        .status-error {
+            background-color: rgba(248, 81, 73, 0.2);
+            color: #f85149;
+            border: 1px solid rgba(248, 81, 73, 0.4);
+        }
+
+        /* Styl pro ukázkovou předlohu */
+        .template-box {
+            background-color: #161b22;
+            border: 1px dashed #c59b27;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .template-box h3 {
+            color: #c59b27;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        .template-preview-card {
+            background-color: #0b0e14;
+            border-left: 4px solid #c59b27;
+            padding: 1.2rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .template-preview-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            margin-top: 3rem;
+            border-top: 1px solid #30363d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="interni.html" class="active">🔒 Interní Systém</a>
+    </nav>
+
+    <div class="container">
+        <a href="interni.html" class="btn-back">&larr; Zpět do interního systému</a>
+
+        <div class="page-title">
+            <h2>Zápis o Zadržení (Booking Report)</h2>
+            <p>Vyplňte protokol o zatčení pro automatické odeslání na Discord i uložení do databáze.</p>
+        </div>
+
+        <div class="form-card">
+            <form id="bookingForm">
+
+                <!-- Zatržítko pro nastavení Webhooku -->
+                <div class="form-group full-width" style="margin-bottom: 1rem;">
+                    <label>Discord Webhook URL (Nastavení kanálu):</label>
+                    <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." required>
+                    <small style="color: #8b949e; font-size: 0.8rem;">Zadejte adresu Webhooku vašeho Discord kanálu.</small>
+                </div>
+
+                <hr style="border-color: #30363d; margin-bottom: 1.5rem;">
+
+                <div class="form-grid">
+                    <!-- Údaje o podezřelém -->
+                    <div class="form-group">
+                        <label for="suspectName">Jméno a Příjmení Zadrženého:</label>
+                        <input type="text" id="suspectName" placeholder="např. John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="suspectDob">Datum Narození (DoB):</label>
+                        <input type="text" id="suspectDob" placeholder="např. 12.05.1998" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fineAmount">Celková Pokuta ($):</label>
+                        <input type="number" id="fineAmount" placeholder="např. 5000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jailTime">Trest (v měsících / min):</label>
+                        <input type="number" id="jailTime" placeholder="např. 30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="officerName">Zatýkající Příslušník (Jméno & Volačka):</label>
+                        <input type="text" id="officerName" placeholder="např. Senior Trooper Michael Denver (Lima-1)" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoUrl">URL Fotografie Zadrženého (Mugshot):</label>
+                        <input type="url" id="photoUrl" placeholder="https://i.imgur.com/... (přímý odkaz končící na .png/.jpg)" oninput="previewImage(this.value)" required>
+                        <small style="color: #c59b27; font-size: 0.75rem;">⚠️ Musí jít o <b>přímý odkaz na obrázek</b> (např. z Imguru – pravé tlačítko -> Kopírovat adresu obrázku, nebo nahraný přímo v chatu na Discordu a zkopírovaný odkaz).</small>
+                    </div>
+                </div>
+
+                <!-- Náhled fotografie -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem; text-align: center;">
+                    <img id="imgPreview" class="img-preview" alt="Náhled fotky">
+                </div>
+
+                <!-- Obvinění -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                    <label for="charges">Obvinění (Paragrafy & Činy):</label>
+                    <textarea id="charges" rows="2" placeholder="např. CVC § 23103 - Bezohledná jízda, PC § 148(a) - Resisting Arrest" required></textarea>
+                </div>
+
+                <!-- Popis situace -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                    <label for="situation">Popis Situace:</label>
+                    <textarea id="situation" rows="4" placeholder="Detailní popis průběhu zatčení, důvod zastavení, chování podezřelého..." required></textarea>
+                </div>
+
+                <!-- Doplňující poznámky / Zabavené věci -->
+                <div class="form-group full-width" style="margin-bottom: 1.5rem;">
+                    <label for="notes">Zabavené věci & Poznámky:</label>
+                    <textarea id="notes" rows="2" placeholder="Zabavené nelegální předměty, zbraně, hotovost..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    🚀 Odeslat Booking Report na Discord
+                </button>
+
+            </form>
+
+            <div id="statusMsg" class="status-msg"></div>
+        </div>
+
+        <!-- PŘEDLOHA / UKÁZKA VÝSTUPU NA DISCORDU -->
+        <div class="template-box">
+            <h3>📋 Předloha (Jak bude report vypadat na Discordu)</h3>
+            <div class="template-preview-card">
+                <p style="color: #c59b27; font-weight: bold; font-size: 1.05rem;">🚨 NOVÝ BOOKING REPORT — SASP</p>
+                <hr style="border-color: #30363d; margin: 0.5rem 0 0.8rem 0;">
+                <p><strong>👤 Zadržený:</strong> John Doe (DoB: 12.05.1998)</p>
+                <p><strong>👮 Zatýkající Příslušník:</strong> Senior Trooper Michael Denver (Lima-1)</p>
+                <p><strong>⚖️ Trest & Pokuta:</strong> $5,000 | 30 měsíců</p>
+                <p><strong>📜 Obvinění:</strong> CVC § 23103 – Bezohledná jízda, PC § 148(a) – Resisting Arrest</p>
+                <p><strong>📝 Popis Situace:</strong> Podezřelý ujížděl hlídce v rychlém vozidle, po kolizi s kandelábrem odmítl vystoupit a kladil aktivní odpor při poutech.</p>
+                <p><strong>📦 Zabavené Předměty & Poznámky:</strong> Zabavena nelegální pistole a 2x sáček omamných látek.</p>
+                <p style="color: #8b949e; font-size: 0.8rem; margin-top: 0.8rem;">[ Zde se automaticky zobrazí nahraná fotografie zadrženého (Mugshot) ]</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police.</p>
+    </footer>
+
+    <script>
+        // Náhled obrázku
+        function previewImage(url) {
+            const img = document.getElementById('imgPreview');
+            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                img.src = url;
+                img.style.display = 'inline-block';
+            } else {
+                img.style.display = 'none';
+            }
+        }
+
+        // Pamatovat si zadaný Webhook v paměti prohlížeče
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedWebhook = localStorage.getItem('sasp_webhook_url');
+            if (savedWebhook) {
+                document.getElementById('webhookUrl').value = savedWebhook;
+            }
+        });
+
+        // Odeslání formuláře na Discord Webhook
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const webhookUrl = document.getElementById('webhookUrl').value;
+            const suspectName = document.getElementById('suspectName').value;
+            const suspectDob = document.getElementById('suspectDob').value;
+            const fineAmount = document.getElementById('fineAmount').value;
+            const jailTime = document.getElementById('jailTime').value;
+            const officerName = document.getElementById('officerName').value;
+            const photoUrl = document.getElementById('photoUrl').value;
+            const charges = document.getElementById('charges').value;
+            const situation = document.getElementById('situation').value;
+            const notes = document.getElementById('notes').value || 'Žádné doplňující poznámky';
+
+            const statusMsg = document.getElementById('statusMsg');
+
+            // Uložit Webhook pro příště
+            localStorage.setItem('sasp_webhook_url', webhookUrl);
+
+            // Vytvoření Discord Embed zprávy
+            const embedData = {
+                username: "SASP Booking System",
+                avatar_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png",
+                embeds: [
+                    {
+                        title: "🚨 NOVÝ BOOKING REPORT — SASP",
+                        color: 12948263, // Zlatá barva (#c59b27)
+                        fields: [
+                            { name: "👤 Zadržený", value: `**Jméno:** ${suspectName}\n**DoB:** ${suspectDob}`, inline: true },
+                            { name: "👮 Zatýkající Příslušník", value: officerName, inline: true },
+                            { name: "⚖️ Trest & Pokuta", value: `**Pokuta:** $${Number(fineAmount).toLocaleString()}\n**Trest:** ${jailTime} měsíců`, inline: true },
+                            { name: "📜 Obvinění", value: charges, inline: false },
+                            { name: "📝 Popis Situace", value: situation, inline: false },
+                            { name: "📦 Zabavené Předměty & Poznámky", value: notes, inline: false }
+                        ],
+                        image: photoUrl ? { url: photoUrl } : null,
+                        footer: {
+                            text: "San Andreas State Police — Interní Evidence",
+                            icon_url: "https://raw.githubusercontent.com/reel5421/SanAndreasStatePolice/main/logo.png"
+                        },
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(embedData)
+                });
+
+                if (response.ok) {
+                    statusMsg.className = 'status-msg status-success';
+                    statusMsg.innerText = '✅ Booking report byl úspěšně odeslán na Discord!';
+                    statusMsg.style.display = 'block';
+                    document.getElementById('bookingForm').reset();
+                    document.getElementById('imgPreview').style.display = 'none';
+                    // Obnovit načtený Webhook URL
+                    document.getElementById('webhookUrl').value = webhookUrl;
+                } else {
+                    throw new Error('Chyba při odesílání.');
+                }
+            } catch (err) {
+                statusMsg.className = 'status-msg status-error';
+                statusMsg.innerText = '❌ Nepodařilo se odeslat report. Zkontrolujte URL Webhooku.';
+                statusMsg.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
