@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>San Andreas State Police — Oficiální Portál</title>
+    <title>SASP — Hlavní Portál</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
             line-height: 1.6;
         }
 
-        /* Hlavička s logem po stranách */
+        /* Hlavička */
         header {
             background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             border-bottom: 3px solid #c59b27;
@@ -81,12 +81,23 @@
             font-size: 0.95rem;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active {
             background-color: #21262d;
             color: #c59b27;
         }
 
-        /* Hlavní obsah */
+        nav a.login-btn {
+            background-color: #21262d;
+            border: 1px solid #c59b27;
+            color: #c59b27;
+        }
+
+        nav a.login-btn:hover {
+            background-color: #c59b27;
+            color: #0b0e14;
+        }
+
+        /* Hlavní kontejner */
         .container {
             max-width: 1000px;
             margin: 2rem auto;
@@ -98,15 +109,24 @@
             border: 1px solid #30363d;
             border-radius: 8px;
             padding: 2rem;
-            margin-bottom: 2rem;
             text-align: center;
+            margin-bottom: 2rem;
         }
 
         .hero h2 {
             color: #c59b27;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
+        .hero p {
+            color: #8b949e;
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Mřížka karet */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -117,23 +137,39 @@
             background-color: #161b22;
             border: 1px solid #30363d;
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: #c59b27;
+            transform: translateY(-3px);
         }
 
         .card h3 {
             color: #58a6ff;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: #8b949e;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
 
         .btn {
             display: inline-block;
             background-color: #c59b27;
             color: #0b0e14;
-            padding: 0.6rem 1.2rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 1rem;
+            text-align: center;
             transition: background 0.3s;
         }
 
@@ -162,33 +198,29 @@
 <body>
 
     <header>
-        <!-- Levá strana: Logo SASP -->
         <div class="header-side">
             <img src="logo.png" alt="SASP Logo">
         </div>
-
-        <!-- Střed: Název -->
         <div class="header-center">
             <h1>San Andreas State Police</h1>
             <p>Oběť — Čest — Služba | Oficiální Portál</p>
         </div>
-
-        <!-- Pravá strana: Logo SASP -->
         <div class="header-side">
             <img src="logo.png" alt="SASP Logo">
         </div>
     </header>
 
     <nav>
-        <a href="index.html">Úvod</a>
-        <a href="#nabor">Nábor</a>
-        <a href="#media">Media Relations</a>
+        <a href="index.html" class="active">Úvod</a>
+        <a href="media.html">Media Relations</a>
         <a href="divize.html">Divize</a>
-        <a href="#vedeni">Vedení</a>
-        <a href="#dotazy">Dotazy</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="dotazy.html">Dotazy & Kontakt</a>
+        <a href="interni.html" class="login-btn">🔒 Interní Login</a>
     </nav>
 
-<div class="container">
+    <div class="container">
         <section class="hero" id="uvod">
             <h2>Vítejte na oficiálním portálu SASP</h2>
             <p>San Andreas State Police zajišťuje bezpečnost, dodržování zákonů a pořádek ve všech hrabstvích i městech státu San Andreas. Náš tým je odhodlán sloužit veřejnosti 24 hodin denně, 7 dní v týdnu.</p>
@@ -213,6 +245,12 @@
                 <a href="vedeni.html" class="btn">Zobrazit Vedení</a>
             </div>
 
+            <div class="card" id="kontakty-karta">
+                <h3>Kontakty & Sestava</h3>
+                <p>Detailní přehled hodností od vedení až po seržanty a kontaktní údaje.</p>
+                <a href="kontakty.html" class="btn">Zobrazit Kontakty</a>
+            </div>
+
             <div class="card" id="media">
                 <h3>Media Relations</h3>
                 <p>Tiskové zprávy, aktuální oznámení pro veřejnost, pátrání po osobách a tiskovky sboru.</p>
@@ -221,11 +259,12 @@
 
             <div class="card" id="dotazy">
                 <h3>Dotazy & Kontakt</h3>
-                <p>Máte dotaz na vedení, potřebujete podat hlášení nebo oficiální stížnost?</p>
-                <a href="dotazy.html" class="btn" target="_blank">Kontaktuj nás</a>
+                <p>Máte dotaz na vedení, potřebujete podat formální stížnost nebo navštívit náš Discord?</p>
+                <a href="dotazy.html" class="btn">Přejít na Dotazy</a>
             </div>
         </div>
     </div>
+
     <footer>
         <p>&copy; 2026 San Andreas State Police.</p>
     </footer>
