@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SASP — Hlavní Portál</title>
+    <title>SASP — San Andreas State Police</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,6 @@
             line-height: 1.6;
         }
 
-        /* Hlavička */
         header {
             background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
             border-bottom: 3px solid #c59b27;
@@ -60,7 +59,6 @@
             font-size: 0.95rem;
         }
 
-        /* Navigace */
         nav {
             background-color: #161b22;
             display: flex;
@@ -69,6 +67,9 @@
             gap: 15px;
             padding: 1rem;
             border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav a {
@@ -86,104 +87,225 @@
             color: #c59b27;
         }
 
-        nav a.login-btn {
-            background-color: #21262d;
-            border: 1px solid #c59b27;
-            color: #c59b27;
-        }
-
-        nav a.login-btn:hover {
-            background-color: #c59b27;
-            color: #0b0e14;
-        }
-
-        /* Hlavní kontejner */
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
+        /* Hero banner */
         .hero {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 2rem;
+            background: linear-gradient(rgba(11, 14, 20, 0.7), rgba(11, 14, 20, 0.9)), url('hero-bg.jpg') center/cover no-repeat;
+            padding: 4rem 2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            border-bottom: 1px solid #30363d;
         }
 
         .hero h2 {
+            font-size: 2.5rem;
             color: #c59b27;
-            font-size: 1.8rem;
+            text-transform: uppercase;
             margin-bottom: 1rem;
         }
 
         .hero p {
-            color: #8b949e;
-            font-size: 1rem;
             max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Mřížka karet */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            border-color: #c59b27;
-            transform: translateY(-3px);
-        }
-
-        .card h3 {
-            color: #58a6ff;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .card p {
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.1rem;
             color: #8b949e;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
         }
 
-        .btn {
+        .hero-btn {
             display: inline-block;
             background-color: #c59b27;
             color: #0b0e14;
-            padding: 0.7rem 1.2rem;
+            font-weight: bold;
+            padding: 0.8rem 1.8rem;
             border-radius: 6px;
             text-decoration: none;
-            font-weight: bold;
-            text-align: center;
             transition: background 0.3s;
         }
 
-        .btn:hover {
-            background-color: #e0b130;
+        .hero-btn:hover {
+            background-color: #e5b32a;
         }
 
-        /* Patička */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h2 {
+            color: #c59b27;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            color: #8b949e;
+            margin-top: 0.4rem;
+        }
+
+        /* Sekce O nás */
+        .about-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #c9d1d9;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-left: 3px solid #c59b27;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-box h4 {
+            color: #c59b27;
+            font-size: 1.5rem;
+        }
+
+        .stat-box p {
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin: 0;
+        }
+
+        /* Sekce Historie (Timeline) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #30363d;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: #0b0e14;
+            border: 3px solid #c59b27;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 1.2rem;
+            background-color: #161b22;
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+        }
+
+        .timeline-content h4 {
+            color: #c59b27;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        /* Sekce Galerie */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: #c59b27;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            text-align: center;
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
             background-color: #0d1b2a;
             color: #8b949e;
-            margin-top: 3rem;
             border-top: 1px solid #30363d;
         }
 
@@ -191,6 +313,24 @@
             header {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 23px;
+            }
+
+            .right {
+                left: 0%;
             }
         }
     </style>
@@ -212,61 +352,120 @@
 
     <nav>
         <a href="index.html" class="active">Úvod</a>
-        <a href="media.html">Media Relations</a>
+        <a href="#about">O nás</a>
+        <a href="#history">Historie</a>
+        <a href="#gallery">Galerie</a>
         <a href="divize.html">Divize</a>
         <a href="vedeni.html">Vedení</a>
-        <a href="kontakty.html">Kontakty</a>
-        <a href="dotazy.html">Dotazy & Kontakt</a>
-        <a href="interni.html" class="login-btn">🔒 Interní Login</a>
+        <a href="formalcomplaint.html">⚖️ Stížnosti</a>
+        <a href="interni.html">🔒 Interní Systém</a>
     </nav>
 
+    <!-- Hero Banner -->
+    <div class="hero">
+        <h2>Ochrana a Služba Státu San Andreas</h2>
+        <p>San Andreas State Police je primární orgán pro vymáhání práva s působností po celém státě. Naším posláním je zajišťovat bezpečnost, pořádek a spravedlnost pro všechny občany.</p>
+        <a href="formalcomplaint.html" class="hero-btn">Podat formální stížnost</a>
+    </div>
+
     <div class="container">
-        <section class="hero" id="uvod">
-            <h2>Vítejte na oficiálním portálu SASP</h2>
-            <p>San Andreas State Police zajišťuje bezpečnost, dodržování zákonů a pořádek ve všech hrabstvích i městech státu San Andreas. Náš tým je odhodlán sloužit veřejnosti 24 hodin denně, 7 dní v týdnu.</p>
+
+        <!-- SEKCE: O NÁS -->
+        <section id="about" style="scroll-margin-top: 80px;">
+            <div class="section-title">
+                <h2>O Nás</h2>
+                <p>Profesionalita, transparentnost a nekompromisní vymáhání zákonů</p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-text">
+                    <h3>San Andreas State Police (SASP)</h3>
+                    <p>Jsme státní policejní sbor odpovědný za patrolování dálničních sítí, dohled nad venkovskými i městskými oblastmi a poskytování specializované podpory všem složkám IZS v San Andreas.</p>
+                    <p>Naše divize využívají nejmodernější taktiky, techniku a výcvik k potírání závažné kriminality, řízení krizových situací a zajištění plynulosti dopravy.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h4>24/7</h4>
+                        <p>Služba občanům</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>100%</h4>
+                        <p>Nasazení v terénu</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>100+</h4>
+                        <p>Vyřešených případů</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>ALL-STATE</h4>
+                        <p>Působnost</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <div class="grid">
-            <div class="card" id="nabor">
-                <h3>Nábor k SASP</h3>
-                <p>Chceš se stát součástí státní policie? Nábor je aktuálně <strong>OTEVŘEN</strong>. Hledáme odhodlané kadety do našich řad.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8daeV4yNqS9sEE5R6YvcwdesR8uWYivw-8w7dlIz7Kf1nhQ/viewform?usp=dialog" class="btn" target="_blank">Podat Přihlášku</a>
+        <!-- SEKCE: HISTORIE -->
+        <section id="history" style="scroll-margin-top: 80px;">
+            <div class="section-title">
+                <h2>Historie Sboru</h2>
+                <p>Cesta od založení po moderní státní policii</p>
             </div>
 
-            <div class="card" id="divize">
-                <h3>Divize</h3>
-                <p>Seznamte se s našimi specializovanými divizemi.</p>
-                <a href="divize.html" class="btn">Zobrazit Divize</a>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Založení Státní Patroly</h4>
+                        <p>Vznik prvních jednotek zaměřených na bezpečnost na hlavních dopravních tepnách státu San Andreas.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>Reorganizace na SASP</h4>
+                        <p>Sjednocení dálniční patroly a státních složek pod jednotné velitelství San Andreas State Police.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Vznik Specializovaných Divizí</h4>
+                        <p>Zřízení taktických jednotek (SEB/SWAT), letecké podpory (Air Support) a vyšetřovacích divizí pro boj s organizovaným zločinem.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>Digitalizace a Modernizace</h4>
+                        <p>Spuštění nového interního databázového portálu SASP, automatických booking reportů a systému pro veřejnost.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKCE: GALERIE -->
+        <section id="gallery" style="scroll-margin-top: 80px;">
+            <div class="section-title">
+                <h2>Fotogalerie</h2>
+                <p>Pohled do každodenní služby příslušníků SASP</p>
             </div>
 
-            <div class="card" id="vedeni">
-                <h3>Vedení sboru</h3>
-                <p>Kompletní přehled vrchního velení San Andreas State Police a kontakty na odpovědné osoby.</p>
-                <a href="vedeni.html" class="btn">Zobrazit Vedení</a>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?q=80&w=800" alt="Hlídkové vozidlo">
+                    <div class="gallery-caption">Dálniční Patrola v nasazení</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800" alt="Právo a spravedlnost">
+                    <div class="gallery-caption">Dodržování zákonů státu San Andreas</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800" alt="Taktické cvičení">
+                    <div class="gallery-caption">Pravidelný taktický výcvik příslušníků</div>
+                </div>
             </div>
+        </section>
 
-            <div class="card" id="kontakty-karta">
-                <h3>Kontakty & Sestava</h3>
-                <p>Detailní přehled hodností od vedení až po seržanty a kontaktní údaje.</p>
-                <a href="kontakty.html" class="btn">Zobrazit Kontakty</a>
-            </div>
-
-            <div class="card" id="media">
-                <h3>Media Relations</h3>
-                <p>Tiskové zprávy, aktuální oznámení pro veřejnost, pátrání po osobách a tiskovky sboru.</p>
-                <a href="media.html" class="btn">Přejít na Tiskovky</a>
-            </div>
-
-            <div class="card" id="dotazy">
-                <h3>Dotazy & Kontakt</h3>
-                <p>Máte dotaz na vedení, potřebujete podat formální stížnost nebo navštívit náš Discord?</p>
-                <a href="dotazy.html" class="btn">Přejít na Dotazy</a>
-            </div>
-        </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 San Andreas State Police.</p>
+        <p>&copy; 2026 San Andreas State Police. Všechna práva vyhrazena.</p>
     </footer>
 
 </body>
