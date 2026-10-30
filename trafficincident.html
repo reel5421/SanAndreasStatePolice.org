@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN ANDREAS STATE POLICE — Traffic Incident Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 2px solid #c59b27;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #121721;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover {
+            color: #c59b27;
+        }
+
+        .btn-login {
+            background-color: rgba(197, 155, 39, 0.1);
+            border: 1px solid #c59b27;
+            color: #c59b27 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            background-color: #c59b27 !important;
+            color: #0b0e14 !important;
+        }
+
+        .main-container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            width: 100%;
+        }
+
+        .form-card {
+            background-color: #121721;
+            border: 1px solid #1f2733;
+            border-radius: 8px;
+            padding: 2.5rem;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title h2 {
+            color: #c59b27;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-title p {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        .section-heading {
+            color: #4a9dec;
+            font-size: 1.15rem;
+            margin: 1.8rem 0 1rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #c59b27;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .legal-warning {
+            background-color: rgba(197, 155, 39, 0.05);
+            border-left: 3px solid #c59b27;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #c59b27;
+            color: #0b0e14;
+            font-weight: bold;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #e5b32a;
+        }
+
+        #status-message {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2733;
+            margin-top: auto;
+        }
+
+        @media (max-width: 650px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>SAN ANDREAS STATE POLICE</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="formalcomplaint.html">Dotazy & Kontakt</a>
+        <a href="interni.html" class="btn-login">🔒 Interní Login</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="form-card">
+            <div class="form-title">
+                <h2>Traffic Incident & Citation Report</h2>
+                <p>Záznam o dopravním přestupku a udělené pokutě / trestu</p>
+            </div>
+
+            <form id="trafficForm">
+                
+                <div class="section-heading">👤 Informace o Pachateli</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pachatelJmeno">Jméno pachatele:</label>
+                        <input type="text" id="pachatelJmeno" required placeholder="např. John">
+                    </div>
+                    <div class="form-group">
+                        <label for="pachatelPrijmeni">Příjmení pachatele:</label>
+                        <input type="text" id="pachatelPrijmeni" required placeholder="např. Doe">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pachatelDob">Datum narození:</label>
+                    <input type="date" id="pachatelDob" required>
+                </div>
+
+                <div class="section-heading">🚨 Přestupek & Sazebník (CVC)</div>
+                <div class="form-group">
+                    <label for="obvineni">Obvinění (např. CVC § 22350 - Nepřiměřená rychlost):</label>
+                    <input type="text" id="obvineni" required placeholder="Zadejte paragraf a popis přestupku">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pokuta">Výše pokuty ($):</label>
+                        <input type="number" id="pokuta" required placeholder="např. 1500">
+                    </div>
+                    <div class="form-group">
+                        <label for="casVeVezeni">Čas ve vězení (v minutách, nepovinné):</label>
+                        <input type="number" id="casVeVezeni" placeholder="např. 0 nebo 30">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="podpisPachatele">Podpis / Souhlas pachatele s pokutou:</label>
+                    <input type="text" id="podpisPachatele" required placeholder="Elektronický podpis (Jméno Příjmení)">
+                </div>
+
+                <div class="section-heading">🛡️ Záznam Troopera & Důkazy</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trooperJmeno">Jméno řešícího Troopera:</label>
+                        <input type="text" id="trooperJmeno" required placeholder="např. Officer Marcus Vance">
+                    </div>
+                    <div class="form-group">
+                        <label for="trooperPrijmeni">Služební číslo / Hodnost:</label>
+                        <input type="text" id="trooperPrijmeni" required placeholder="např. Trooper II / #405">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dugazy">Důkazy (např. radar, dashcam záznam, vizuální kontrola):</label>
+                    <textarea id="dugazy" required placeholder="Popište důkazy – např. Měření radarem: 95 mph v 65 mph zóně, záznam z palubní kamery..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="datumCasUdalosti">Datum a čas incidentu:</label>
+                        <input type="text" id="datumCasUdalosti" required placeholder="např. 30.10.2026, 21:45">
+                    </div>
+                    <div class="form-group">
+                        <label for="podpisTroopera">Podpis Troopera:</label>
+                        <input type="text" id="podpisTroopera" required placeholder="Váš podpis (hodnost + příjmení)">
+                    </div>
+                </div>
+
+                <div class="legal-warning">
+                    ⚠️ <strong>Právní upozornění:</strong> Úmyslné uvedení nepravdivých údajů, falešné obviňování nebo falšování úředního záznamu o přestupku naplňuje skutkovou podstatu trestného činu podle <strong>California Penal Code § 148.5</strong> a je přísně stíháno. Odesláním formuláře potvrzujete pravdivost zapsaných údajů.
+                </div>
+
+                <button type="submit" class="submit-btn">Odeslat Traffic Incident Report</button>
+                <div id="status-message"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1565861819573211136/tK1jA-dyMM1dbXOjgrROcXvcAvb8Xdh8LMXwtD3GMUNb8hQ15zzpnVl4QusqFqS3gzZF";
+
+        document.getElementById('trafficForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.querySelector('.submit-btn');
+            const statusMsg = document.getElementById('status-message');
+            
+            btn.disabled = true;
+            btn.textContent = "Odesílám záznam...";
+            statusMsg.style.color = "#8b949e";
+            statusMsg.textContent = "Probíhá odesílání hlášení na server...";
+
+            // Sběr dat z formuláře
+            const data = {
+                pachatelJmeno: document.getElementById('pachatelJmeno').value,
+                pachatelPrijmeni: document.getElementById('pachatelPrijmeni').value,
+                pachatelDob: document.getElementById('pachatelDob').value,
+                obvineni: document.getElementById('obvineni').value,
+                pokuta: document.getElementById('pokuta').value,
+                casVeVezeni: document.getElementById('casVeVezeni').value || "0",
+                podpisPachatele: document.getElementById('podpisPachatele').value,
+                trooperJmeno: document.getElementById('trooperJmeno').value,
+                trooperPrijmeni: document.getElementById('trooperPrijmeni').value,
+                dugazy: document.getElementById('dugazy').value,
+                datumCasUdalosti: document.getElementById('datumCasUdalosti').value,
+                podpisTroopera: document.getElementById('podpisTroopera').value
+            };
+
+            // Vytvoření Discord Embed zprávy
+            const discordPayload = {
+                embeds: [{
+                    title: "🚨 NOVÝ TRAFFIC INCIDENT REPORT",
+                    color: 12933161, // Zlatá/žlutá barva pro SASP
+                    fields: [
+                        {
+                            name: "👤 Informace o Pachateli",
+                            value: `**Jméno:** ${data.pachatelJmeno} ${data.pachatelPrijmeni}\n**Datum Narození:** ${data.pachatelDob}`,
+                            inline: false
+                        },
+                        {
+                            name: "📜 Přestupek & Trest",
+                            value: `**Obvinění:** ${data.obvineni}\n**Pokuta:** $${data.pokuta}\n**Pobyt ve vězení:** ${data.casVeVezeni} minut\n**Souhlas / Podpis pachatele:** ${data.podpisPachatele}`,
+                            inline: false
+                        },
+                        {
+                            name: "🛡️ Záznam Troopera & Důkazy",
+                            value: `**Zasahující Trooper:** ${data.trooperJmeno} (${data.trooperPrijmeni})\n**Datum a čas:** ${data.datumCasUdalosti}\n**Důkazy:** ${data.dugazy}\n**Podpis Troopera:** ${data.podpisTroopera}`,
+                            inline: false
+                        }
+                    ],
+                    footer: {
+                        text: "San Andreas State Police — Traffic Division Database"
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            // Odeslání na Discord Webhook
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(discordPayload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMsg.style.color = "#3fb950";
+                    statusMsg.textContent = "✅ Záznam o přestupku byl úspěšně odeslán na dispečink!";
+                    document.getElementById('trafficForm').reset();
+                } else {
+                    throw new Error('Chyba při odesílání na Discord.');
+                }
+            })
+            .catch(error => {
+                statusMsg.style.color = "#f85149";
+                statusMsg.textContent = "❌ Nastala chyba při odesílání. Zkuste to prosím znovu.";
+                console.error(error);
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = "Odeslat Traffic Incident Report";
+            });
+        });
+    </script>
+
+</body>
+</html>
