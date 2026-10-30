@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Dotazy & Kontakt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 3px solid #c59b27;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #21262d;
+            color: #c59b27;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #21262d;
+            color: #e6edf3;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border: 1px solid #30363d;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #30363d;
+            color: #c59b27;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2rem;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            margin-top: 0.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-card h3 {
+            color: #58a6ff;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: #8b949e;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #c59b27;
+            color: #0b0e14;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e0b130;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            margin-top: 3rem;
+            border-top: 1px solid #30363d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="dotazy.html" class="active">Dotazy & Kontakt</a>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&larr; Zpět na hlavní stránku</a>
+
+        <div class="page-title">
+            <h2>Dotazy & Kontaktní centrum</h2>
+            <p>Máte zájem kontaktovat velení sboru nebo potřebujete řešit oficiální záležitosti? Vyberte možnost níže.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Možnost 1: Formální stížnost (vede na další HTML) -->
+            <div class="contact-card">
+                <div>
+                    <h3>1. Formální stížnost</h3>
+                    <p>Chcete podat oficiální stížnost na postup či jednání příslušníka SASP? Přejděte na vyhrazenou stránku pro podání stížností.</p>
+                </div>
+                <a href="https://discord.gg/tvujkod" class="btn">Podat stížnost</a>
+            </div>
+
+            <!-- Možnost 2: Kontakt na velení (vede na Discord) -->
+            <div class="contact-card">
+                <div>
+                    <h3>2. Dotaz na velení</h3>
+                    <p>Máte dotaz na chod sboru nebo potřebujete kontaktovat vrchní vedení SASP? Neváhejte a kontaktujte nás.</p>
+                </div>
+                <a href="kontakty.html" class="btn" target="_blank">Kontaktní osoby</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police.</p>
+    </footer>
+
+</body>
+</html>
