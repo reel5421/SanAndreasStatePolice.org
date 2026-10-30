@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASP — Standard Operating Procedure (SOP)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 3px solid #c59b27;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 50%;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #161b22;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 1rem;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: #21262d;
+            color: #c59b27;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background-color: #21262d;
+            color: #e6edf3;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            border: 1px solid #30363d;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #30363d;
+            color: #c59b27;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-title h2 {
+            color: #c59b27;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+        }
+
+        .page-title p {
+            color: #8b949e;
+            margin-top: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .sop-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .sop-card h3 {
+            color: #58a6ff;
+            font-size: 1.4rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sop-card h4 {
+            color: #c59b27;
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sop-card ul, .sop-card ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sop-card li {
+            margin-bottom: 0.5rem;
+            color: #e6edf3;
+        }
+
+        .highlight-box {
+            background-color: #0d1b2a;
+            border-left: 4px solid #c59b27;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            color: #8b949e;
+        }
+
+        .alert-box {
+            background-color: rgba(248, 81, 73, 0.1);
+            border-left: 4px solid #f85149;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            color: #ff7b72;
+        }
+
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .code-item {
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+        }
+
+        .code-item strong {
+            color: #c59b27;
+        }
+
+        .law-item {
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+        }
+
+        .law-item strong {
+            color: #58a6ff;
+        }
+
+        .law-price {
+            color: #3fb950;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            margin-top: 3rem;
+            border-top: 1px solid #30363d;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>San Andreas State Police</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="interni.html" class="active">🔒 Interní Systém</a>
+    </nav>
+
+    <div class="container">
+        <a href="interni.html" class="btn-back">&larr; Zpět do interního systému</a>
+
+        <div class="page-title">
+            <h2>Standard Operating Procedure (SOP)</h2>
+            <p>Závazný dokument operačních postupů pro všechny příslušníky San Andreas State Police.</p>
+        </div>
+
+        <!-- 1. ÚVOD A ZÁKLADNÍ KODEX -->
+        <div class="sop-card">
+            <h3>1. Úvod a Základní Kodex</h3>
+            <p>Příslušníci SASP reprezentují státní složky zákona. Hlavním cílem je zajištění bezpečnosti občanů, vymáhání práva a dodržování služebních postupů.</p>
+            <ul>
+                <li><strong>Profesionalita:</strong> Vždy jednejte s chladnou hlavou, věcně a s respektem vůči veřejnosti i kolegům.</li>
+                <li><strong>Dodržování zákonů:</strong> Striktně dodržujte platný Trestní a Dopravní zákoník, vnitřní předpisy a služební přísahu.</li>
+                <li><strong>Výstroj a uniforma:</strong> Do služby nastupujte výhradně v řádné uniformě odpovídající vaší hodnosti a s předepsanou výbavou (zbraně, taser, pouta, vesta).</li>
+            </ul>
+        </div>
+
+        <!-- 2. RADIOKOMUNIKACE A 10-KÓDY -->
+        <div class="sop-card">
+            <h3>2. Radiokomunikace a 10-Kódy</h3>
+            <p>Komunikace na rádiu musí být stručná, věcná a srozumitelná.</p>
+            <div class="code-grid">
+                <div class="code-item"><strong>10-4:</strong> Rozumím / Potvrzeno</div>
+                <div class="code-item"><strong>10-6:</strong> Zaneprázdněn (mimo provoz)</div>
+                <div class="code-item"><strong>10-7:</strong> Konec služby (Off-duty)</div>
+                <div class="code-item"><strong>10-8:</strong> V službě / K dispozici (On-duty)</div>
+                <div class="code-item"><strong>10-11:</strong> Dopravní kontrola (Traffic Stop)</div>
+                <div class="code-item"><strong>10-20:</strong> Aktuální lokace (Pozice)</div>
+                <div class="code-item"><strong>10-80:</strong> Pronásledování podezřelého vozidla (Pursuit)</div>
+                <div class="code-item" style="border-color: #f85149;"><strong style="color: #f85149;">10-99:</strong> Officer Down! – Nouzové hlášení (pomoc/střelba)</div>
+            </div>
+        </div>
+
+        <!-- 3. POSTUP PŘI DOPRAVNÍ KONTROLE -->
+        <div class="sop-card">
+            <h3>3. Postup při Dopravní Kontrole (Traffic Stop - 10-11)</h3>
+            <ol>
+                <li><strong>Nahlášení:</strong> Nahlaste do vysílačky svou pozici, SPZ vozidla a počet osob (kód 10-11).</li>
+                <li><strong>Zastavení:</strong> Využijte majáky a zastavte vozidlo tak, aby byl váš vůz mírně vyosený (ochrana před nárazem z boku/zezadu).</li>
+                <li><strong>Přístup k vozidlu:</strong> Přistupujte opatrně, sledujte dění uvnitř vozu. Zkontrolujte zadní sedadla.</li>
+                <li><strong>Komunikace:</strong> Pozdravte, představte se, uveďte důvod zastavení a vyžádejte si doklady totožnosti.</li>
+                <li><strong>Kontrola v MDT:</strong> Ověřte řidiče a vozidlo v policejní databázi.</li>
+            </ol>
+        </div>
+
+        <!-- 4. PRONÁSLEDOVÁNÍ VOZIDLA A PIT MANÉVR -->
+        <div class="sop-card">
+            <h3>4. Pronásledování vozidla (Pursuit - 10-80) a PIT Manévr</h3>
+            <ul>
+                <li><strong>Primary Unit:</strong> Vozidlo, které zahájilo pronásledování. Určuje směr jízdy a hlásí změny.</li>
+                <li><strong>Secondary Unit:</strong> Druhé vozidlo v pořadí. Přebírá hlášení do rádia, aby se první vůz mohl plně soustředit na řízení.</li>
+            </ul>
+
+            <h4>PIT Manévr (Pravidla a Odpovědnost):</h4>
+            <ul>
+                <li>O provedení PIT manévru není nutné předem žádat velení ani Supervisora na rádiu.</li>
+                <li>Každý Trooper posoudí situaci samostatně na základě vlastního uvážení a vyhodnocení aktuálního rizika.</li>
+            </ul>
+
+            <div class="alert-box">
+                <strong>⚠️ Osobní odpovědnost:</strong> Trooper, který se rozhodne PIT manévr provést, nese plnou služební i právní odpovědnost za případné následky (např. způsobení škoda civilistům, zničení služebního auta, nepřiměřené ohrožení na životě). V případě neuváženého použití čelí vnitřnímu vyšetřování a interním trestům.
+            </div>
+
+            <div class="highlight-box">
+                <strong>🚫 Striktní zákaz:</strong> Je přísně zakázáno provádět PIT manévr na motocykly a čtyřkolky!
+            </div>
+        </div>
+
+        <!-- 5. POUŽITÍ SÍLY -->
+        <div class="sop-card">
+            <h3>5. Použití Síly (Use of Force)</h3>
+            <p>Příslušníci SASP postupují v souladu s přiměřeností zásahu:</p>
+            <ol>
+                <li><strong>Verbální výzvy:</strong> Využití domluvy a přikázání.</li>
+                <li><strong>Fyzická síla:</strong> Hmaty, chvaty, poutání.</li>
+                <li><strong>Méně než smrtící prostředky:</strong> Taser, obušek, slzotvorný plyn.</li>
+                <li><strong>Smrtící síla:</strong> Použití palné zbraně (výhradně v případě přímého ohrožení života policisty nebo třetích osob).</li>
+            </ol>
+        </div>
+
+        <!-- 6. PRÁVA MIRANDA -->
+        <div class="sop-card">
+            <h3>6. Práva Miranda</h3>
+            <p>Před jakýmkoliv formálním výslechem nebo eskortou do cely je nutné podezřelému přečíst práva:</p>
+            <div class="highlight-box" style="border-left-color: #58a6ff; font-style: italic; font-size: 1.05rem; color: #ffffff;">
+                "Máte právo zůstat zticha. Cokoliv, co řeknete, může a bude použito proti vám u soudu. Máte právo na advokáta. Pokud si ho nemůžete dovolit, bude vám přidělen státem. Rozuměl jste těmto právům?"
+            </div>
+        </div>
+
+        <!-- 7. VÝŇATEK Z TRESTNÍHO A DOPRAVNÍHO ZÁKONÍKU -->
+        <div class="sop-card">
+            <h3>7. Výňatek z Trestního a Dopravního Zákoníku (California Model)</h3>
+            <p style="margin-bottom: 1rem;">Pro potřeby hlídkové služby používá SASP paragrafy vycházející z kalifornské legislativy (Penal Code = PC, Vehicle Code = VC).</p>
+
+            <h4>A. Dopravní přestupky (Vehicle Code – VC)</h4>
+            <div class="law-item">
+                <strong>CVC § 22350 – Překročení rychlosti (Unsafe Speed):</strong> <span class="law-price">Pokuta $500 – $1,500</span>
+            </div>
+            <div class="law-item">
+                <strong>CVC § 23103 – Bezohledná jízda (Reckless Driving):</strong> <span class="law-price">Pokuta $2,000</span> + odtah vozidla
+            </div>
+            <div class="law-item">
+                <strong>CVC § 23152 – Řízení pod vlivem návykových látek (DUI):</strong> <span class="law-price">Pokuta $3,000</span> + odebrání řidičského průkazu
+            </div>
+            <div class="law-item">
+                <strong>CVC § 2800.1 – Ujíždění policii / Neuposlechnutí výzvy (Evading LEO):</strong> <span class="law-price">Pokuta $5,000</span> + 20–40 měsíců
+            </div>
+
+            <h4>B. Trestné činy proti pořádku a úřadům (Penal Code – PC)</h4>
+            <div class="law-item">
+                <strong>PC § 148(a) – Maření výkonu úřední osoby / Resisting Arrest:</strong> <span class="law-price">Pokuta $1,500</span> + 15 měsíců
+            </div>
+            <div class="law-item">
+                <strong>PC § 148.5 – Podání falešného/lživého oznámení:</strong> <span class="law-price">Pokuta $2,000</span> + 15 měsíců
+            </div>
+            <div class="law-item">
+                <strong>PC § 243(b) – Napadení policisty (Battery on Peace Officer):</strong> <span class="law-price">Pokuta $5,000</span> + 35 měsíců
+            </div>
+            <div class="law-item">
+                <strong>PC § 664 / 187 – Pokus o vraždu policisty:</strong> <span class="law-price">Pokuta $15,000</span> + 90–120 měsíců
+            </div>
+
+            <h4>C. Zbraně a Nebezpečné látky (Penal Code – PC)</h4>
+            <div class="law-item">
+                <strong>PC § 25400 – Držení nelegální/skryté zbraně (Concealed Firearm):</strong> <span class="law-price">Pokuta $4,000</span> + 25 měsíců
+            </div>
+            <div class="law-item">
+                <strong>PC § 246.3 – Nebezpečná střelba na veřejnosti:</strong> <span class="law-price">Pokuta $5,000</span> + 30 měsíců
+            </div>
+            <div class="law-item">
+                <strong>PC § 11351 – Držení omamných látek za účelem prodeje:</strong> <span class="law-price">Pokuta $5,000 – $15,000</span> + 30–60 měsíců
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police.</p>
+    </footer>
+
+</body>
+</html>
