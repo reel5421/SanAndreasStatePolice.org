@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN ANDREAS STATE POLICE — Fotogalerie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header s logy a názvem */
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 2px solid #c59b27;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Navigace */
+        nav {
+            background-color: #121721;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover {
+            color: #c59b27;
+        }
+
+        nav a.active {
+            color: #c59b27;
+            background-color: rgba(197, 155, 39, 0.1);
+        }
+
+        .btn-login {
+            background-color: rgba(197, 155, 39, 0.1);
+            border: 1px solid #c59b27;
+            color: #c59b27 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            background-color: #c59b27 !important;
+            color: #0b0e14 !important;
+        }
+
+        /* Hlavní obsah s nápisem SOON */
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .soon-box {
+            background-color: #121721;
+            border: 1px solid #1f2733;
+            border-radius: 12px;
+            padding: 4rem 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .soon-box h2 {
+            color: #c59b27;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .soon-box p {
+            color: #8b949e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2733;
+            margin-top: auto;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .soon-box {
+                padding: 2.5rem 1.5rem;
+            }
+            .soon-box h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>SAN ANDREAS STATE POLICE</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="formalcomplaint.html">Dotazy & Kontakt</a>
+        <a href="galerie.html" class="active">Galerie</a>
+        <a href="interni.html" class="btn-login">🔒 Interní Login</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="soon-box">
+            <h2>SOON</h2>
+            <p>Fotogalerie ze služby příslušníků SASP a přehled vozového parku se připravuje. Brzy zde naleznete aktuální záběry z akcí.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Všechna práva vyhrazena.</p>
+    </footer>
+
+</body>
+</html>
