@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN ANDREAS STATE POLICE — Interní Přihlášení</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 2px solid #c59b27;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #121721;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover {
+            color: #c59b27;
+        }
+
+        .btn-login {
+            background-color: rgba(197, 155, 39, 0.1);
+            border: 1px solid #c59b27;
+            color: #c59b27 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login.active {
+            background-color: #c59b27 !important;
+            color: #0b0e14 !important;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .login-card {
+            background-color: #121721;
+            border: 1px solid #1f2733;
+            border-top: 4px solid #c59b27;
+            border-radius: 8px;
+            padding: 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: #c59b27;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+        }
+
+        .login-header p {
+            color: #8b949e;
+            font-size: 0.88rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            color: #c9d1d9;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #c59b27;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #c59b27;
+            color: #0b0e14;
+            font-weight: bold;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.8rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #e5b32a;
+        }
+
+        .error-message {
+            background-color: rgba(248, 81, 73, 0.1);
+            border: 1px solid #f85149;
+            color: #f85149;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2733;
+            margin-top: auto;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>SAN ANDREAS STATE POLICE</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="formalcomplaint.html">Dotazy & Kontakt</a>
+        <a href="login.html" class="btn-login active">🔒 Interní Login</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>🔒 Vstup do Systému</h2>
+                <p>Zabezpečený přístup pouze pro autorizované příslušníky SASP</p>
+            </div>
+
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="username">Uživatelské jméno / ID:</label>
+                    <input type="text" id="username" placeholder="Zadejte uživatelské jméno" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Přístupové heslo:</label>
+                    <input type="password" id="password" placeholder="Zadejte heslo" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Přihlásit se do databáze</button>
+                <div id="errorBox" class="error-message">⚠️ Neplatné uživatelské jméno nebo heslo!</div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+        // Definované přístupové údaje
+        const VALID_USER = "statepolice-72487";
+        const VALID_PASS = "V$tup#D0#$A$P#P0v0l3n_26";
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inputUser = document.getElementById('username').value.trim();
+            const inputPass = document.getElementById('password').value;
+            const errorBox = document.getElementById('errorBox');
+
+            if (inputUser === VALID_USER && inputPass === VALID_PASS) {
+                // Úspěšný login -> Přesměrování do interního systému
+                window.location.href = "interni.html";
+            } else {
+                // Neplatný login -> Zobrazení chybové hlášky
+                errorBox.style.display = "block";
+                document.getElementById('password').value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>
