@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAN ANDREAS STATE POLICE — Zápis Patroly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-bottom: 2px solid #c59b27;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-side img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-center {
+            flex: 2;
+        }
+
+        .header-center h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-center p {
+            color: #c59b27;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        nav {
+            background-color: #121721;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        nav a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        nav a:hover {
+            color: #c59b27;
+        }
+
+        .btn-login {
+            background-color: rgba(197, 155, 39, 0.1);
+            border: 1px solid #c59b27;
+            color: #c59b27 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login:hover {
+            background-color: #c59b27 !important;
+            color: #0b0e14 !important;
+        }
+
+        .main-container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            width: 100%;
+        }
+
+        .form-card {
+            background-color: #121721;
+            border: 1px solid #1f2733;
+            border-radius: 8px;
+            padding: 2.5rem;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title h2 {
+            color: #c59b27;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-title p {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        .section-heading {
+            color: #4a9dec;
+            font-size: 1.15rem;
+            margin: 1.8rem 0 1rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #1f2733;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="time"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #0b0e14;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #c59b27;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #c59b27;
+            color: #0b0e14;
+            font-weight: bold;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #e5b32a;
+        }
+
+        #status-message {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0d1b2a;
+            color: #8b949e;
+            font-size: 0.85rem;
+            border-top: 1px solid #1f2733;
+            margin-top: auto;
+        }
+
+        @media (max-width: 650px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+        <div class="header-center">
+            <h1>SAN ANDREAS STATE POLICE</h1>
+            <p>Oběť — Čest — Služba | Oficiální Portál</p>
+        </div>
+        <div class="header-side">
+            <img src="logo.png" alt="SASP Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Úvod</a>
+        <a href="media.html">Media Relations</a>
+        <a href="divize.html">Divize</a>
+        <a href="vedeni.html">Vedení</a>
+        <a href="kontakty.html">Kontakty</a>
+        <a href="interni.html" class="btn-login">🔒 Interní Login</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="form-card">
+            <div class="form-title">
+                <h2>Zápis Hlídkové Služby (Patrol Report)</h2>
+                <p>Oficiální hlášení o průběhu a výsledcích patroly</p>
+            </div>
+
+            <form id="patrolForm">
+                
+                <div class="section-heading">👤 Zasahující Trooper & Posádka</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trooperJmeno">Jméno a příjmení Troopera:</label>
+                        <input type="text" id="trooperJmeno" required placeholder="např. Marcus Vance">
+                    </div>
+                    <div class="form-group">
+                        <label for="posadka">Spolujezdec / Posádka:</label>
+                        <input type="text" id="posadka" placeholder="např. Officer John Doe (nebo Solo)">
+                    </div>
+                </div>
+
+                <div class="section-heading">⏰ Časové Rozmezí Patroly</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="casOd">Od (Začátek):</label>
+                        <input type="text" id="casOd" required placeholder="např. 18:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="casDo">Do (Koniec):</label>
+                        <input type="text" id="casDo" required placeholder="např. 20:30">
+                    </div>
+                </div>
+
+                <div class="section-heading">🚔 Služební Vozidlo & Stav</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vozidlo">Typ vozidla:</label>
+                        <input type="text" id="vozidlo" required placeholder="např. Vapid Stanier / Cruiser">
+                    </div>
+                    <div class="form-group">
+                        <label for="spz">Registrační značka (SPZ):</label>
+                        <input type="text" id="spz" required placeholder="např. 49XYZ123">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fotoPred">Foto PŘED patrolou (URL adresa):</label>
+                        <input type="text" id="fotoPred" placeholder="https://imgur.com/... (nepovinné)">
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoPo">Foto PO patrole (URL adresa):</label>
+                        <input type="text" id="fotoPo" placeholder="https://imgur.com/... (nepovinné)">
+                    </div>
+                </div>
+
+                <div class="section-heading">📝 Průběh a Popis Patroly</div>
+                <div class="form-group">
+                    <label for="popisUdalosti">Co se stalo / Popis akcí:</label>
+                    <textarea id="popisUdalosti" required placeholder="Popište klíčové momenty, řešené přestupky, nehody nebo zásahy během patroly..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Odeslat Zápis Patroly</button>
+                <div id="status-message"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 San Andreas State Police — Všechna práva vyhrazena.</p>
+    </footer>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1566248004598628495/33SAtrwWHBRbEIqK3S94TgUHB4H39jZULX6so1rBry6Fx-qNO1dQaPqynCsrFA4k2BiC";
+
+        document.getElementById('patrolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.querySelector('.submit-btn');
+            const statusMsg = document.getElementById('status-message');
+            
+            btn.disabled = true;
+            btn.textContent = "Odesílám zápis...";
+            statusMsg.style.color = "#8b949e";
+            statusMsg.textContent = "Probíhá odesílání hlášení na server...";
+
+            const data = {
+                trooperJmeno: document.getElementById('trooperJmeno').value,
+                posadka: document.getElementById('posadka.value') || "Nikdo / Solo",
+                casOd: document.getElementById('casOd').value,
+                casDo: document.getElementById('casDo').value,
+                vozidlo: document.getElementById('vozidlo').value,
+                spz: document.getElementById('spz').value,
+                fotoPred: document.getElementById('fotoPred').value || "Neuvedeno",
+                fotoPo: document.getElementById('fotoPo').value || "Neuvedeno",
+                popisUdalosti: document.getElementById('popisUdalosti').value
+            };
+
+            const discordPayload = {
+                embeds: [{
+                    title: "📋 NOVÝ ZÁPIS PATROLY",
+                    color: 12933161,
+                    fields: [
+                        {
+                            name: "👤 Posádka",
+                            value: `**Hlavní Trooper:** ${data.trooperJmeno}\n**Spolujezdec:** ${document.getElementById('posadka').value || 'Nikdo'}`,
+                            inline: false
+                        },
+                        {
+                            name: "⏰ Časové Rozmezí",
+                            value: `**Od:** ${data.casOd} | **Do:** ${data.casDo}`,
+                            inline: false
+                        },
+                        {
+                            name: "🚔 Vozidlo",
+                            value: `**Model:** ${data.vozidlo}\n**SPZ:** ${data.spz}`,
+                            inline: false
+                        },
+                        {
+                            name: "📸 Stav Auta (Fotografie)",
+                            value: `**Před patrolou:** ${data.fotoPred}\n**Po patrole:** ${data.fotoPo}`,
+                            inline: false
+                        },
+                        {
+                            name: "📝 Popis Patroly",
+                            value: data.popisUdalosti,
+                            inline: false
+                        }
+                    ],
+                    footer: {
+                        text: "San Andreas State Police — Patrol Division"
+                    },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(discordPayload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusMsg.style.color = "#3fb950";
+                    statusMsg.textContent = "✅ Zápis patroly byl úspěšně odeslán na dispečink!";
+                    document.getElementById('patrolForm').reset();
+                } else {
+                    throw new Error('Chyba při odesílání na Discord.');
+                }
+            })
+            .catch(error => {
+                statusMsg.style.color = "#f85149";
+                statusMsg.textContent = "❌ Nastala chyba při odesílání. Zkuste to prosím znovu.";
+                console.error(error);
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = "Odeslat Zápis Patroly";
+            });
+        });
+    </script>
+
+</body>
+</html>
