@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAN ANDREAS STATE POLICE — Interní Přihlášení</title>
+    <title>SAN ANDREAS STATE POLICE — Discord Přihlášení</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #050b14 0%, #0d1e38 100%); border-bottom: 3px solid #2563eb;
+            background: linear-gradient(135deg, #050b14 0%, #0d1e38 100%);
             border-bottom: 2px solid #c59b27;
             padding: 1.2rem 2rem;
             display: flex;
@@ -119,10 +119,10 @@
             max-width: 420px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            text-align: center;
         }
 
         .login-header {
-            text-align: center;
             margin-bottom: 2rem;
         }
 
@@ -138,65 +138,27 @@
         .login-header p {
             color: #8b949e;
             font-size: 0.88rem;
+            line-height: 1.4;
         }
 
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        label {
-            display: block;
-            color: #c9d1d9;
-            font-size: 0.88rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        input[type="text"],
-        input[type="password"] {
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #5865F2;
+            color: #ffffff;
             width: 100%;
-            padding: 0.75rem;
-            background-color: #07090e;
-            border: 1px solid #30363d;
+            padding: 0.9rem;
             border-radius: 6px;
-            color: #e6edf3;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #c59b27;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: #c59b27;
-            color: #0b0e14;
+            text-decoration: none;
             font-weight: bold;
-            padding: 0.85rem;
-            border: none;
-            border-radius: 6px;
             font-size: 1rem;
-            cursor: pointer;
             transition: background 0.2s;
-            margin-top: 0.8rem;
         }
 
-        .submit-btn:hover {
-            background-color: #e5b32a;
-        }
-
-        .error-message {
-            background-color: rgba(248, 81, 73, 0.1);
-            border: 1px solid #f85149;
-            color: #f85149;
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
+        .discord-btn:hover {
+            background-color: #4752C4;
         }
 
         footer {
@@ -218,12 +180,10 @@
     </style>
 </head>
 <body>
-    
-    </div>
 
-        <header style="background: #0d1117; border-bottom: 2px solid #1e3a8a; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;">
+    <header style="background: #0d1117; border-bottom: 2px solid #1e3a8a; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;">
         <div style="display: flex; align-items: center; gap: 1.2rem;">
-            <img src="logo.png" style="max-height: 65px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));">
+            <img src="logo.png" style="max-height: 65px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));" alt="Logo">
             <div>
                 <h1 style="font-size: 1.6rem; margin: 0; color: #ffffff; letter-spacing: 1px; font-weight: 800; text-transform: uppercase;">San Andreas State Police</h1>
                 <p style="font-size: 0.9rem; margin: 0.2rem 0 0 0; color: #c59b27; font-weight: 600;">Oběť — Čest — Služba | Oficiální Portál</p>
@@ -249,23 +209,13 @@
         <div class="login-card">
             <div class="login-header">
                 <h2>🔒 Vstup do Systému</h2>
-                <p>Zabezpečený přístup pouze pro autorizované příslušníky SASP</p>
+                <p>Pro vstup do zabezpečené databáze SASP se přihlaste pomocí svého ověřeného Discord účtu.</p>
             </div>
 
-            <form id="authForm">
-                <div class="form-group">
-                    <label for="username">Uživatelské jméno / ID:</label>
-                    <input type="text" id="username" placeholder="Zadejte uživatelské jméno" required autocomplete="off">
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Přístupové heslo:</label>
-                    <input type="password" id="password" placeholder="Zadejte heslo" required>
-                </div>
-
-                <button type="submit" class="submit-btn">Přihlásit se do databáze</button>
-                <div id="errorBox" class="error-message">⚠️ Neplatné uživatelské jméno nebo heslo!</div>
-            </form>
+            <!-- Odkaz směřuje přímo na tvou Discord OAuth2 aplikaci s cílem v interni.html -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1570592874716856482&response_type=code&redirect_uri=https%3A%2F%2Freel5421.github.io%2FSanAndreasStatePolice.org%2Finterni.html&scope=identify%20guilds.members.read" class="discord-btn">
+                Přihlásit se přes Discord
+            </a>
         </div>
     </div>
 
@@ -274,32 +224,16 @@
     </footer>
 
     <script>
-        // Definované přístupové údaje
-        const VALID_USER = "statepolice-72487";
-        const VALID_PASS = "V$tup#D0#$A$P#P0v0l3n_26";
+        // Po návratu z Discordu zachytíme 'code' v URL a pustíme uživatele dál do systému
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
 
-        document.getElementById('authForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const inputUser = document.getElementById('username').value.trim();
-            const inputPass = document.getElementById('password').value;
-            const errorBox = document.getElementById('errorBox');
-
-            if (inputUser === VALID_USER && inputPass === VALID_PASS) {
-                // Úspěšný login -> Přesměrování do interního systému
-                window.location.href = "interni.html";
-            } else {
-                // Neplatný login -> Zobrazení chybové hlášky
-                errorBox.style.display = "block";
-                document.getElementById('password').value = "";
-            }
-        });
+        if (code) {
+            sessionStorage.setItem('sasp_discord_auth', 'true');
+            // Vyčistí URL od autorizačního kódu a přesměruje/zanechá v interni.html
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
     </script>
 
 </body>
 </html>
-
-
-
-
-
