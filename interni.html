@@ -22,44 +22,71 @@
 
         /* Header s logy a názvem */
         header {
-            background: linear-gradient(135deg, #050b14 0%, #0d1e38 100%);
-            border-bottom: 2px solid #c59b27;
-            padding: 1.2rem 2rem;
+            background: #0d1117;
+            border-bottom: 2px solid #1e3a8a;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: center;
+            color: white;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .header-side {
-            flex: 1;
+        /* Styl pro identifikační bublinu v hlavičce */
+        .officer-badge-header {
+            background: rgba(18, 23, 33, 0.9);
+            border: 1px solid #1f2733;
+            border-left: 4px solid #c59b27;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
-        .header-side img {
-            max-height: 110px;
-            width: auto;
+        .officer-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8b949e;
         }
 
-        .header-center {
-            flex: 2;
-        }
-
-        .header-center h1 {
+        .officer-info strong {
             color: #ffffff;
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 800;
+            font-weight: 700;
         }
 
-        .header-center p {
+        .rank-tag {
+            background-color: rgba(197, 155, 39, 0.15);
+            border: 1px solid #c59b27;
             color: #c59b27;
-            font-weight: 600;
-            margin-top: 0.2rem;
-            font-size: 0.95rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+        }
+
+        .logout-btn-header {
+            background-color: rgba(248, 81, 73, 0.1);
+            border: 1px solid #f85149;
+            color: #f85149;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logout-btn-header:hover {
+            background-color: #f85149;
+            color: #ffffff;
         }
 
         /* Navigace */
@@ -107,59 +134,6 @@
         .btn-login:hover {
             background-color: #c59b27 !important;
             color: #0b0e14 !important;
-        }
-
-        /* Styl pro identifikační bublinu příslušníka */
-        .officer-badge-bar {
-            background-color: #121721;
-            border-bottom: 1px solid #1f2733;
-            padding: 0.8rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .officer-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.95rem;
-            color: #8b949e;
-        }
-
-        .officer-info strong {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .rank-tag {
-            background-color: rgba(197, 155, 39, 0.15);
-            border: 1px solid #c59b27;
-            color: #c59b27;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        .logout-btn {
-            background-color: rgba(248, 81, 73, 0.1);
-            border: 1px solid #f85149;
-            color: #f85149;
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .logout-btn:hover {
-            background-color: #f85149;
-            color: #ffffff;
         }
 
         /* Hlavní obsah */
@@ -272,21 +246,18 @@
         @media (max-width: 650px) {
             header {
                 flex-direction: column;
+                text-align: center;
                 gap: 1rem;
             }
             .cards-grid {
                 grid-template-columns: 1fr;
-            }
-            .officer-badge-bar {
-                flex-direction: column;
-                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
 
-    <header style="background: #0d1117; border-bottom: 2px solid #1e3a8a; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;">
+    <header>
         <div style="display: flex; align-items: center; gap: 1.2rem;">
             <img src="logo.png" style="max-height: 65px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));" alt="Logo">
             <div>
@@ -294,9 +265,15 @@
                 <p style="font-size: 0.9rem; margin: 0.2rem 0 0 0; color: #c59b27; font-weight: 600;">Oběť — Čest — Služba | Oficiální Portál</p>
             </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 20px; font-weight: bold;">
-            <span style="color: #e2e8f0; font-size: 0.95rem;">Tísňová linka: <strong style="color: #3b82f6; font-size: 1.1rem;">📞 911</strong></span>
-            <span style="background: #1e3a8a; color: white; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.85rem; letter-spacing: 0.5px; border: 1px solid #3b82f6;">NONSTOP OPERAČNÍ STŘEDISKO</span>
+
+        <!-- IDENTIFIKAČNÍ BUBLINA PŘÍSLUŠNÍKA V HLAVIČCE -->
+        <div class="officer-badge-header">
+            <div class="officer-info">
+                <span>🛡️ <strong id="officerName">Načítání...</strong></span>
+                <span>•</span>
+                <span>Hodnost: <span id="officerRank" class="rank-tag">Načítání...</span></span>
+            </div>
+            <button onclick="logout()" class="logout-btn-header">Odhlásit</button>
         </div>
     </header>
 
@@ -309,16 +286,6 @@
         <a href="formalcomplaint.html">Dotazy & Kontakt</a>
         <a href="login.html" class="btn-login active">🔒 Interní Login</a>
     </nav>
-
-    <!-- IDENTIFIKAČNÍ BUBLINA PŘÍSLUŠNÍKA -->
-    <div class="officer-badge-bar">
-        <div class="officer-info">
-            <span>🛡️ Přihlášený příslušník: <strong id="officerName">Načítání...</strong></span>
-            <span>•</span>
-            <span>Hodnost: <span id="officerRank" class="rank-tag">Načítání...</span></span>
-        </div>
-        <button onclick="logout()" class="logout-btn">Odhlásit se</button>
-    </div>
 
     <div class="main-container">
 
